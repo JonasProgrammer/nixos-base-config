@@ -10,6 +10,7 @@
 }:
 let
   machine-specific = ./machine-specific.d;
+  make-link = pkg: path: let base = baseNameOf path; in { "extra-libs/${base}".source = "${pkgs."${pkg}"}/${path}"; };
 in
 {
   imports = [
@@ -38,9 +39,10 @@ in
 
   services.pcscd.enable = true;
 
-  environment.etc = {
-    "extra-libs/libykcs11.so".source = "${pkgs.yubico-piv-tool}/lib/libykcs11.so";
-  };
+  environment.etc = lib.mergeAttrsList [
+	(make-link "yubico-piv-tool" "lib/libykcs11.so")
+	(make-link "opensc" "lib/opensc-pkcs11.so")
+  ];
 
   programs = {
     vim = {
