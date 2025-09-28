@@ -20,12 +20,14 @@
     pavucontrol
 
     # Software
+    chromium
     firefox
     keepassxc
     kitty
     nemo
     texstudio
     thunderbird
+    wdisplays
   ];
 
   environment.variables.TERM = "kitty";
