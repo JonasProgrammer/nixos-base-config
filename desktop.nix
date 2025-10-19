@@ -24,7 +24,9 @@
     firefox
     keepassxc
     kitty
-    nemo
+    nemo-fileroller
+    nemo-with-extensions
+    peazip
     texstudio
     thunderbird
     wdisplays
@@ -48,6 +50,16 @@
     extraOptions = [
       "--unsupported-gpu"
     ];
+  };
+
+  xdg = {
+    mime = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = [ "nemo.desktop" ];
+        "application/x-gnome-saved-search" = [ "nemo.desktop" ];
+      };
+    };
   };
 
   programs.steam = {
