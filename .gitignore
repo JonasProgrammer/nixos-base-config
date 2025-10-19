@@ -1,2 +1,4 @@
 machine-specific.d/*
 !machine-specific.d/.keep
+
+hardware-configuration.nix

@@ -8,7 +8,9 @@
   pkgs,
   ...
 }:
-
+let
+  stateVersionFile = ./machine-specific.d/_stateVersion.nix;
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -113,8 +115,8 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion =
-    if builtins.pathExists ./machine-specific.d/_stateVersion.nix then
-      import ./machine-specific.d/stateVersion.nix
+    if builtins.pathExists stateVersionFile then
+      import stateVersionFile
     else
       "25.05"; # Did you read the comment?
 
