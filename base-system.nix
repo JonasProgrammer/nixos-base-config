@@ -41,6 +41,7 @@ in
     less
     netcat-openbsd
     nixfmt-rfc-style
+    tmux
     yubico-piv-tool
     yubikey-manager
   ];

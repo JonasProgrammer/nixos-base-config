@@ -32,6 +32,14 @@
     wdisplays
   ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      chromium = prev.chromium.override {
+        enableWideVine = true;
+      };
+    })
+  ];
+
   environment.variables.TERM = "kitty";
 
   services.gnome.gnome-keyring.enable = true;
@@ -70,7 +78,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
       };
     };
   };
