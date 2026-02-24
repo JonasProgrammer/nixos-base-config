@@ -34,11 +34,14 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    cached-nix-shell
     curl
     dig
+    ethtool
     git
     htop
     less
+    net-tools
     netcat-openbsd
     nixfmt-rfc-style
     tmux
