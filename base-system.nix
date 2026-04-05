@@ -10,18 +10,11 @@
 }:
 let
   machine-specific = ./machine-specific.d;
-  make-link =
-    pkg: path:
-    let
-      base = baseNameOf path;
-    in
-    {
-      "extra-libs/${base}".source = "${pkgs."${pkg}"}/${path}";
-    };
 in
 {
   imports = [
     ./hw-base.nix
+    ./gpg-yubi.nix
   ]
   ++ (map (n: "${machine-specific}/${n}") (
     builtins.filter (n: (builtins.match ".*[.]nix$" n) != null) (
@@ -44,20 +37,8 @@ in
     net-tools
     netcat-openbsd
     nixfmt-rfc-style
+    openssl
     tmux
-    yubico-piv-tool
-    yubikey-manager
-  ];
-
-  services.udev.packages = with pkgs; [
-    yubikey-personalization
-  ];
-
-  services.pcscd.enable = true;
-
-  environment.etc = lib.mergeAttrsList [
-    (make-link "yubico-piv-tool" "lib/libykcs11.so")
-    (make-link "opensc" "lib/opensc-pkcs11.so")
   ];
 
   programs = {
