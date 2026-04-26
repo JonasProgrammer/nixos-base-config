@@ -14,4 +14,6 @@
   # also sets for wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  hardware.sane.enable = true;
+
 }

@@ -33,12 +33,10 @@ in
       yubikey-personalization
     ];
     pcscd.enable = true;
-    yubikey-agent.enable = true;
   };
 
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry-curses;
   };
 

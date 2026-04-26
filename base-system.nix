@@ -17,9 +17,9 @@ in
     ./gpg-yubi.nix
   ]
   ++ (map (n: "${machine-specific}/${n}") (
-    builtins.filter (n: (builtins.match ".*[.]nix$" n) != null) (
-      builtins.attrNames (builtins.readDir machine-specific)
-    )
+    builtins.filter (
+      n: (builtins.match ".*[.]nix$" n) != null && (builtins.match ".*[.]helper[.]nix$" n) == null
+    ) (builtins.attrNames (builtins.readDir machine-specific))
   ));
 
   nixpkgs.config.packageOverrides = pkgs: {
@@ -39,6 +39,7 @@ in
     nixfmt-rfc-style
     openssl
     tmux
+    usbutils
   ];
 
   programs = {

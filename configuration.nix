@@ -115,9 +115,6 @@ in
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion =
-    if builtins.pathExists stateVersionFile then
-      import stateVersionFile
-    else
-      "25.05"; # Did you read the comment?
+    if builtins.pathExists stateVersionFile then import stateVersionFile else "25.05"; # Did you read the comment?
 
 }

@@ -24,12 +24,18 @@
     firefox
     keepassxc
     kitty
+    libreoffice
     nemo-fileroller
     nemo-with-extensions
     peazip
     texstudio
     thunderbird
     wdisplays
+
+    # Scanning
+    gscan2pdf
+    sane-backends
+    sane-frontends
   ];
 
   nixpkgs.overlays = [
