@@ -33,9 +33,9 @@
     wdisplays
 
     # Scanning
-    gscan2pdf
-    sane-backends
-    sane-frontends
+    #gscan2pdf
+    #sane-backends
+    #sane-frontends
   ];
 
   nixpkgs.overlays = [
@@ -46,8 +46,6 @@
     })
   ];
 
-  environment.variables.TERM = "kitty";
-
   services.gnome.gnome-keyring.enable = true;
   services.gvfs.enable = true;
 
@@ -57,6 +55,20 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
   ];
+
+  environment.variables.TERM = "foot";
+
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "JetBrainsMono Nerd Font Mono:size=12";
+      };
+      scrollback = {
+        lines = 10000;
+      };
+    };
+  };
 
   programs.sway = {
     enable = true;
