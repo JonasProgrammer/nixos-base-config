@@ -106,6 +106,53 @@
     pulse.enable = true;
   };
 
+  services.xserver = {
+    # Makes the generated XKB configuration available to other
+    # consumers under /etc/X11/xkb.
+    exportConfiguration = true;
+
+    xkb.extraLayouts.us-umlaut = {
+      description = "English (US, AltGr German umlauts)";
+      languages = [ "eng" ];
+
+      symbolsFile = pkgs.writeText "us-umlaut" ''
+        partial alphanumeric_keys
+
+        xkb_symbols "basic" {
+          # Retain the normal US layout.
+          include "us(basic)"
+
+          # Right Alt becomes AltGr / Level 3.
+          include "level3(ralt_switch)"
+
+          # AltGr+A -> ä, AltGr+Shift+A -> Ä
+          key <AC01> {
+            type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+            [ a, A, adiaeresis, Adiaeresis ]
+          };
+
+          # AltGr+O -> ö, AltGr+Shift+O -> Ö
+          key <AD09> {
+            type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+            [ o, O, odiaeresis, Odiaeresis ]
+          };
+
+          # AltGr+U -> ü, AltGr+Shift+U -> Ü
+          key <AD07> {
+            type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+            [ u, U, udiaeresis, Udiaeresis ]
+          };
+
+          # AltGr+S -> ß, AltGr+Shift+S -> ẞ
+          key <AC02> {
+            type[Group1] = "FOUR_LEVEL_ALPHABETIC",
+            [ s, S, ssharp, U1E9E ]
+          };
+        };
+      '';
+    };
+  };
+
   security.polkit.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
 
