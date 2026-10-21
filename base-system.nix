@@ -36,7 +36,7 @@ in
     less
     net-tools
     netcat-openbsd
-    nixfmt-rfc-style
+    nixfmt
     openssl
     tmux
     usbutils
@@ -52,8 +52,8 @@ in
       libraries =
         with pkgs;
         [
-          xorg.libxcb
-          xorg.xcbutilcursor # libxcb-cursor
+          libxcb
+          libxcb-cursor
           libsecret
           libsecret.dev
         ]
